@@ -1,11 +1,11 @@
-class Estudiante{
+class User{
     email: string;
     nombres: string;
     apellidos: string;
     edad: number;
     rol: string
     telefono: string;
-    password: string
+    password: string;
     constructor(
         email: string, 
         nombres: string,
@@ -25,4 +25,4 @@ class Estudiante{
     }
 }
 
-export default Estudiante;
+export default User;

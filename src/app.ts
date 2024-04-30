@@ -1,13 +1,14 @@
 import express from "express";
 import bodyParser from 'body-parser';
+import dotenv from "dotenv";
 
 import register from './routers/register';
 import auth from './routers/auth';
 
-import dotenv from "dotenv";
 dotenv.config();
 
-const app = express().use(bodyParser.json());
+const app = express();
+app.use(bodyParser.json());
 
 app.use('/register', register);
 app.use('/auth', auth);
