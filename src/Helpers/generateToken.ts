@@ -8,7 +8,7 @@ const generateToken =  (user: UserAuth): string => {
     rol: user.rol,
   };
 
-  return jwt.sign(payload, process.env.JWT_SECRET || "~;#[jumDvmROcE-J-~3gR=h", { expiresIn: '1h' });
+  return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
 };
 
 export default generateToken;
