@@ -12,7 +12,7 @@ class UserRepository {
     }
 
     static async login(auth: Auth){
-        const sql = 'SELECT  password FROM User WHERE email= ?';
+        const sql = 'SELECT  password, email, rol FROM User WHERE email= ?';
         const values = [auth.email];
         const result: any = await db.query(sql,values);
         if (result[0].length > 0) { 
@@ -22,7 +22,12 @@ class UserRepository {
             if (result[0].length > 0){
                 const isPasswordValid = await bcrypt.compare(auth.password, result[0][0].password);
                 if (isPasswordValid){
-                  return {logged: true, status: "Successful authentication"}
+                  return {
+                    logged: true, 
+                    status: "Successful authentication",
+                    email: result[0][0].email,
+                    rol: result[0][0].rol
+                }
                 }
                 return {logged: false, status: "Invalid username or password" };
               }

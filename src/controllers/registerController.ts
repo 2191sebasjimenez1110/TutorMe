@@ -1,8 +1,8 @@
-import bcrypt from 'bcryptjs';
 import { Request, Response } from "express";
 
 import UserRepository from '../repostories/UserRepository';
 import User from '../dto/UserDto';
+import generateHash from '../Helpers/generateHash';
 
 
 let register = async (req: Request, res: Response) => {
@@ -17,8 +17,7 @@ let register = async (req: Request, res: Response) => {
       password
     } = req.body;
 
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    const hashedPassword = await generateHash(password);
     const result = await UserRepository.add((new User(email, nombre, apellido, edad,telefono,rol, hashedPassword)));
     return res.status(201).send(
       { status: 'register ok'}

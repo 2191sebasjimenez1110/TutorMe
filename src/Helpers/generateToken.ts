@@ -1,14 +1,13 @@
-import jwt from "jsonwebtoken";
-import UserAuth from '../dto/AuhtDto';
+import jwt from 'jsonwebtoken';
+import { emit } from 'process';
 
-const generateToken =  (user: UserAuth): string => {
-  const payload = {
-    id: user.id,
-    email: user.email,
-    rol: user.rol,
-  };
-
-  return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
-};
+interface payload{ 
+  email : string,
+  rol : string
+}
+let generateToken = (properties: payload, key: any, minutes: number) => jwt.sign({
+    exp: Math.floor(Date.now() / 1000) + (minutes * 60),
+    data: properties}, key
+);
 
 export default generateToken;

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import UserAuth from "../dto/AuhtDto";
-import auhtService from "../service/authService";
+import auhtService from "../service/userService";
 
 let authController = async (req: Request, res: Response) => {
     try {
